@@ -1,0 +1,41 @@
+@model UserModel
+@{
+    ViewData["Title"] = "User Edit Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">This Is User Edit Page</h1>
+</div>
+@if (Model != null)
+{
+    <div class="container mb-5">
+        <h3>User Id : @Model.UserId</h3>
+        <h3>User Name : @Model.Name</h3>
+    </div>
+    <form method="post" asp-controller="User" asp-action="Update" asp-route-id="@Model.UserId">
+        <div class="container">
+            <input type="hidden" asp-for="UserId">
+            <div class="text-danger" asp-validation-summary="All"></div>
+            <div class="row mb-3">
+                <div class="col-2">
+                    <label asp-for="Name" class="col-form-label"></label>
+                </div>
+                <div class="col-10 ">
+                    <input type="text" asp-for="Name" class="form-controll p-2 w-100">
+                    <div class="col"></div><span class="text-danger" asp-validation-for="Name"></span>
+                </div>
+                <div class="col-2">
+                    <label asp-for="Email" class="col-form-label"></label>
+                </div>
+                <div class="col-10 ">
+                    <input type="text" asp-for="Email" class="form-controll p-2 w-100">
+                    <div class="col"></div><span class="text-danger" asp-validation-for="Email"></span>
+                </div>
+
+            </div>
+        </div>
+        <input type="submit" class="btn btn-success w-100 mt-3" value="Save">
+
+    </form>
+
+}

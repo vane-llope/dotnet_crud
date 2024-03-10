@@ -1,0 +1,53 @@
+@model List<UserModel>
+@{
+    ViewData["Title"] = "User Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">This Is User Page</h1>
+</div>
+
+<div class="w-100">
+    <a asp-controller="User" asp-action="Create" class="btn btn-success w-25">Add User +</a>
+</div>
+<table class="table table-striped container my-5 table-hover text-center">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null && Model.Count() > 0)
+        {
+
+            @foreach (var user in Model)
+            {
+                <tr>
+                    <td>@user.UserId</td>
+                    <td>@user.Name</td>
+                    <td>
+                        <a class="text-dark" asp-controller="User" asp-action="Edit" asp-route-id="@user.UserId"> Edit</a>
+                    </td>
+                    <td>
+                        <form method="post" asp-controller="User" asp-action="Delete" asp-route-id="@user.UserId">
+                            <button type="submit" class="btn" onclick="return ConfirmDelete()"> Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+
+        }
+    </tbody>
+</table>
+<br />
+@section ConfirmPopUp {
+    <script>
+        function ConfirmDelete()
+        {
+            return confirm("Are You Sure You Want To Delete This User?")
+        }
+    </script>
+}
